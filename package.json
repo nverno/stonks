@@ -53,5 +53,24 @@
   },
   "dependencies": {
     "axios": "^0.21.1"
+  },
+  "lint-staged": {
+    "**/**/*.(js|jsx|md|css|html)": [
+      "prettier --trailing-comma es5 --single-quote --write"
+    ],
+    "**/*.json": [
+      "prettier --write"
+    ],
+    "yarn.lock": [
+      "git rm --cached"
+    ],
+    "package-lock.json": [
+      "git rm --cached"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\" && lint-staged"
+    }
   }
 }
