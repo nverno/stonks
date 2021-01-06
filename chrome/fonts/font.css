@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Futura Light'), local('Futura-Light'),
+    url('FuturaLT-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Futura Medium'), local('Futura-Medium'),
+    url('FuturaLT.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Futura';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Futura Heavy'), local('Futura-Heavy'),
+    url('FuturaLT-Bold.woff2') format('woff2');
+}
+
+body {
+  font-family: 'Futura', sans-serif;
+  font-size: inherit;
+}

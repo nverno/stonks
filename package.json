@@ -2,7 +2,7 @@
   "name": "stonks",
   "version": "0.0.1",
   "description": "See what's up with your stonks",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"**/*.+(js|json|css)\"",
@@ -10,6 +10,10 @@
     "postinstall": "webpack",
     "start": "node build/bundle.js",
     "deploy": "deploy lol"
+  },
+  "engines": {
+    "node": ">=15",
+    "npm": ">=6"
   },
   "eslintConfig": {
     "extends": [
@@ -26,8 +30,7 @@
   },
   "keywords": [
     "stonks",
-    "stocks",
-    "chrome"
+    "stocks"
   ],
   "author": "Noah Peart <noah.v.peart@gmail.com> (https://www.github.com/nverno)",
   "license": "WTFPL",

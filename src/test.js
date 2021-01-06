@@ -1,3 +1,3 @@
 import axios from 'axios';
 
-export const test = () => console.log('Hhaha');
+export const test = () => console.log('bung');

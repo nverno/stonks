@@ -1,0 +1,47 @@
+{
+  "name": "Stonks",
+  "version": "0.0.1",
+  "description": "Watch your stonks",
+  "permissions": ["storage", "contextMenus", "tabs"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_title": "Stonks",
+    "default_icon": "icons/stonks.png"
+  },
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icons/stonks.png",
+    "32": "icons/stonks.png",
+    "48": "icons/stonks.png",
+    "128": "icons/stonks.png"
+  },
+  "devtools_page": "html/devtools.html",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Q",
+        "mac": "MacCtrl+Shift+Q"
+      },
+      "description": "Search for company or symbol"
+    },
+    "search-dwim": {
+      "suggested_key": {
+        "default": "Alt+Shift+Q",
+        "mac": "Alt+Shift+Q"
+      },
+      "description": "Search for company or symbol"
+    }
+  },
+  "manifest_version": 2
+}
