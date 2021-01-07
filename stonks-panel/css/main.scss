@@ -1,0 +1,12 @@
+@import "~bootstrap";
+
+@import 'styles.scss';
+@import 'font.css';
+
+$body-color: red;
+
+body {
+  font-family: 'Futura', sans-serif;
+  font-size: inherit;
+  color: $body-color;
+}
