@@ -1,6 +1,6 @@
 const { test } = require('./test');
 
-import Icon from '../icons/stonks.png';
+import Icon from '../../icons/stonks.png';
 import '../css/main.scss';
 
 function component() {
