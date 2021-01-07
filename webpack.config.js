@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   context: __dirname,
   entry: {
-    index: './src/index.js',
+    index: './stonks-panel/src/index.js',
   },
   output: {
     filename: '[name].bundle.js',
