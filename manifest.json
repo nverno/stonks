@@ -2,7 +2,7 @@
   "name": "Stonks",
   "version": "0.0.1",
   "description": "Watch your stonks",
-  "permissions": ["storage", "contextMenus", "tabs"],
+  "permissions": ["storage", "contextMenus", "activeTab"],
   "web_accessible_resources": ["*.html"],
   "content_security_policy": "script-src 'self' 'sha256-/13BBW2yQVtpCsBV7JiO23y7pwEFFUobOzefJ27Nltg='; object-src 'self'",
   "content_scripts": [
@@ -10,7 +10,7 @@
       "matches": ["<all_urls>"],
       "js": ["build/content.bundle.js"],
       "run_at": "document_idle",
-      "all_frames": true
+      "all_frames": false
     }
   ],
   "browser_action": {

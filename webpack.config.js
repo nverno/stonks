@@ -23,6 +23,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Stonks',
       cleanStaleWebpackAssets: false,
+      template: './stonks-panel/src/index.ejs',
+      // only inject index.bundle.js, others are used by extension only
+      chunks: ['index'],
+      inject: false,
     }),
   ],
   devServer: {

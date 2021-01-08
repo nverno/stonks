@@ -24,4 +24,5 @@ function component() {
 
 test();
 
+document.body.className = 'theme-open-up';
 document.body.appendChild(component());

@@ -1,31 +1,36 @@
-import modalContainer from './modal/modal.html';
-import './modal/modal.scss';
+import popupContainer from './popup/popup_container.html';
+import './content.scss';
 
-chrome.runtime.onMessage.addListener((request) => {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(
+    sender.tab
+      ? 'from content script: ' + sender.tab.url
+      : 'from extension: ' + sender
+  );
   console.log('Request: ', request);
-  if (request.type === 'popup-modal') {
-    toggleModal();
+
+  if (request.type === 'popup') {
+    togglePopup();
+    sendResponse({ popup: true });
   }
 });
 
-const toggleModal = () => {
-  let modal = document.querySelector('.content-modal');
-
-  if (modal) {
-    modal.hasAttribute('open') ? modal.close() : modal.show();
+const togglePopup = () => {
+  let popup = document.querySelector('.popup-container');
+  if (popup) {
+    document.body.removeChild(popup);
   } else {
-    modal = document.createElement('dialog');
-    modal.className = 'content-modal';
-    modal.innerHTML = modalContainer;
-    document.body.appendChild(modal);
-    modal.showModal();
+    popup = document.createElement('div');
+    popup.className = 'popup-container';
+    popup.innerHTML = popupContainer;
+    document.body.appendChild(popup);
 
     const iframe = document.getElementById('popup-content');
     iframe.src = chrome.extension.getURL('../build/index.html');
     iframe.frameBorder = 0;
 
-    modal.querySelector('button').addEventListener('click', () => {
-      modal.close();
+    popup.querySelector('#cancel-button').addEventListener('click', () => {
+      document.body.removeChild(popup);
     });
   }
 };

@@ -1,0 +1,61 @@
+:root {
+  --st__primary-base: rgb(0,200,5);
+  --st__primary-hover: rgba(38,208,43,1);
+  --st__primary-pressed: rgba(0,160,4,1);
+  --st__primary-light-base: rgba(0,200,5,0.4);
+  --st__primary-lightest-base: rgba(0,200,5,0.2);
+  --st__semantic-positive-base: rgb(0,200,5);
+  --st__semantic-positive-light: rgba(0,200,5,0.4);
+  --st__semantic-negative-base: rgb(255,80,0);
+  --st__semantic-negative-light: rgba(255,80,0,0.4);
+  --st__semantic-success-base: rgb(0,200,5);
+  --st__semantic-success-light: rgba(0,200,5,0.4);
+  --st__semantic-error-base: rgb(255,80,0);
+  --st__semantic-error-light: rgba(255,80,0,0.4);
+  --st__semantic-scary-base: rgb(255,80,0);
+  --st__semantic-scary-light: rgba(255,80,0,0.4);
+  --st__primary-textOverlay: var(--st__neutral-bg1);
+  --st__primary-light-textOverlay: var(--st__primary-base);
+  --st__primary-lightest-textOverlay: var(--st__primary-base);
+  --st__neutral-fg1: rgb(255,255,255);
+  --st__neutral-fg2: rgb(121,133,139);
+  --st__neutral-fg3: rgb(84,93,97);
+  --st__neutral-bg3: rgb(48,54,58);
+  --st__neutral-bg2: rgb(30,33,36);
+  --st__neutral-bg1: rgb(0,0,0);
+  --st__neutral-hover-bg1: rgb(30,33,36);
+  --st__neutral-hover-bg2: rgb(48,54,58);
+  --st__neutral-pressed-bg1: rgb(48,54,58);
+  --st__neutral-pressed-bg2: rgb(48,54,58);
+  --st__text-color: rgb(255,255,255);
+  --st__shadow__s1: rgba(0,0,0,0.6);
+  --st__shadow__s2: rgba(0,0,0,0.6);
+  --st__focus-inner-color: rgb(0,127,245);
+  --st__focus-outer-color: rgba(0,127,245,0.4);
+}
+ 
+.theme-open-up {
+  --st__primary-base: rgb(0,200,5);
+  --st__primary-hover: rgba(38,208,43,1);
+  --st__primary-pressed: rgba(0,160,4,1);
+  --st__primary-light-base: rgba(0,200,5,0.4);
+  --st__primary-lightest-base: rgba(0,200,5,0.2);
+}
+
+.theme-open-down {
+  --st__primary-base: rgb(255, 80, 0);
+  --st__primary-hover: rgba(230, 72, 0, 1);
+  --st__primary-pressed: rgba(204, 64, 0, 1);
+  --st__primary-light-base: rgba(255, 80, 0, 0.3);
+  --st__primary-lightest-base: rgba(255, 80, 0, 0.1);
+}
+
+body {
+  font-family: 'Futura', sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  height: 100%;
+
+  color: var(--st__neutral-fg1);
+  background-color: var(--st__neutral-bg1);
+}

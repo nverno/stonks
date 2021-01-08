@@ -2,11 +2,9 @@
 
 @import 'styles.scss';
 @import '../../css/font.css';
+@import '../../css/theme.scss';
 
-$body-color: red;
-
-body {
-  font-family: 'Futura', sans-serif;
-  font-size: inherit;
-  color: $body-color;
-}
+// body {
+//   font-family: 'Futura', sans-serif;
+//   font-size: inherit;
+// }

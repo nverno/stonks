@@ -1,3 +1,5 @@
+import { isIframe } from './util';
+
 chrome.runtime.onInstalled.addListener(function () {
   chrome.contextMenus.create({
     id: 'stonksContextMenu',
@@ -17,7 +19,15 @@ chrome.commands.onCommand.addListener(function (command) {
 });
 
 chrome.browserAction.onClicked.addListener(function (tab) {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { type: 'popup-modal' });
-  });
+  if (!isIframe()) {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { type: 'popup' },
+        function (response) {
+          console.log(response);
+        }
+      );
+    });
+  }
 });
