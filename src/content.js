@@ -24,7 +24,13 @@ const togglePopup = () => {
   } else {
     popup = document.createElement('div');
     popup.className = 'popup-container';
-    popup.innerHTML = popupContainer;
+    popup.innerHTML = `
+<iframe id="popup-content"></iframe>
+<div class="cancel-container">
+  <img src=${CloseIcon} class="cancel-button-icon">
+</div>
+`;
+    console.log('html:', popup.innerHTML);
     document.body.appendChild(popup);
 
     const iframe = document.getElementById('popup-content');

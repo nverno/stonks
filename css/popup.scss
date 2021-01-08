@@ -6,7 +6,7 @@
   right: 12px;
   botton: initial;
   left: initial;
-  z-index: 2147483647 !important;
+  z-index: 1999 !important;
   display: block;
   border: none;
   border-radius: 20px;
@@ -28,13 +28,14 @@
   position: absolute;
   right: 16px;
   top: 16px;
-  z-index: 1;
+  z-index: 1999;
   cursor: pointer;
 }
 
 .cancel-button-icon {
   width: 24px;
   height: 24px;
+  z-index: 2000;
   -webkit-mask-image: url('../icons/close.svg');
-  background-color: var(--st__neutral-fg2);
+  fill: var(--st__neutral-fg1);
 }
