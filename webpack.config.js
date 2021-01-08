@@ -7,6 +7,8 @@ module.exports = {
   context: __dirname,
   entry: {
     index: './stonks-panel/src/index.js',
+    content: './src/content.js',
+    background: './src/background.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -60,9 +62,13 @@ module.exports = {
           filename: 'fonts/[name][ext]',
         },
       },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
     ],
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '*'],
   },

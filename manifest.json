@@ -3,28 +3,29 @@
   "version": "0.0.1",
   "description": "Watch your stonks",
   "permissions": ["storage", "contextMenus", "tabs"],
+  "web_accessible_resources": ["*.html"],
+  "content_security_policy": "script-src 'self' 'sha256-/13BBW2yQVtpCsBV7JiO23y7pwEFFUobOzefJ27Nltg='; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content.js"],
+      "js": ["build/content.bundle.js"],
       "run_at": "document_idle",
       "all_frames": true
     }
   ],
   "browser_action": {
-    "default_popup": "html/popup.html",
     "default_title": "Stonks",
-    "default_icon": "stonks-panel/build/images/stonks.png"
+    "default_icon": "icons/stonks.png"
   },
   "background": {
-    "scripts": ["src/background.js"],
+    "scripts": ["build/background.bundle.js"],
     "persistent": false
   },
   "icons": {
-    "16": "stonks-panel/build/images/stonks.png",
-    "32": "stonks-panel/build/images/stonks.png",
-    "48": "stonks-panel/build/images/stonks.png",
-    "128": "stonks-panel/build/images/stonks.png"
+    "16": "icons/stonks.png",
+    "32": "icons/stonks.png",
+    "48": "icons/stonks.png",
+    "128": "icons/stonks.png"
   },
   "devtools_page": "html/devtools.html",
   "commands": {
@@ -37,8 +38,8 @@
     },
     "search-dwim": {
       "suggested_key": {
-        "default": "Alt+Shift+Q",
-        "mac": "Alt+Shift+Q"
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
       },
       "description": "Search for company or symbol"
     }
