@@ -59,3 +59,7 @@ body {
   color: var(--st__neutral-fg1);
   background-color: var(--st__neutral-bg1);
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

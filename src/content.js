@@ -1,6 +1,8 @@
-import popupContainer from './popup/popup_container.html';
-import './content.scss';
+import popupContainer from './popup_container.html';
+import CloseIcon from '../icons/close.svg';
+import '../css/popup.scss';
 
+// Listen for messages from the background page
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(
     sender.tab
@@ -29,7 +31,7 @@ const togglePopup = () => {
     iframe.src = chrome.extension.getURL('../build/index.html');
     iframe.frameBorder = 0;
 
-    popup.querySelector('#cancel-button').addEventListener('click', () => {
+    popup.querySelector('.cancel-container').addEventListener('click', () => {
       document.body.removeChild(popup);
     });
   }

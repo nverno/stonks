@@ -26,13 +26,15 @@
 
 .cancel-container {
   position: absolute;
-  top: 0px;
-  left: 5px;
+  right: 16px;
+  top: 16px;
+  z-index: 1;
+  cursor: pointer;
+}
 
-  button {
-    padding: 8px 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 20px;
-  }
+.cancel-button-icon {
+  width: 24px;
+  height: 24px;
+  -webkit-mask-image: url('../icons/close.svg');
+  background-color: var(--st__neutral-fg2);
 }

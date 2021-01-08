@@ -1,7 +1,15 @@
+import $ from 'jquery';
 const { test } = require('./test');
 
 import Icon from '../../icons/stonks.png';
 import '../css/main.scss';
+
+$(document).ready(function () {
+  $('#search-form').on('submit', function () {
+    const search = $('.search').val();
+    console.log('searching for: ', search);
+  });
+});
 
 function component() {
   const element = document.createElement('div');
