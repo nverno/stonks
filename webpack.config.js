@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   context: __dirname,
   entry: {
-    index: './stonks-panel/src/index.js',
+    index: './src/popup/index.js',
     content: './src/content.js',
     background: './src/background.js',
   },
@@ -19,11 +19,11 @@ module.exports = {
     // runtimeChunk: 'single',
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Stonks',
       cleanStaleWebpackAssets: false,
-      template: './stonks-panel/src/index.ejs',
+      template: './src/popup/index.ejs',
       // only inject index.bundle.js, others are used by extension only
       chunks: ['index'],
       inject: false,
@@ -41,6 +41,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/env'],
+            plugins: ['@babel/plugin-transform-runtime'],
           },
         },
       },

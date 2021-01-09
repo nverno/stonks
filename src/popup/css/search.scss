@@ -1,0 +1,55 @@
+.search-section {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+}
+
+#search-form {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  color: var(--st__neutral-fg1);
+}
+
+input[type='text'] {
+  line-height: 40px;
+}
+
+.search-input {
+  display: block;
+  font-size: 24px;
+  font-family: ClipperSoleil, "Helvetica Neue", "Lucida Grande", sans-serif;
+  font-style: italic;
+  font-stretch: 100%;
+  font-weight: 400;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 0 4px 0 3px;
+  line-height: 250%;
+
+  &:hover {
+    background-color: var(--st__neutral-hover-bg1);
+  }
+
+  &:focus {
+    background-color: var(--st__neutral-pressed-bg1);
+    border: 1px solid var(--st__neutral-fg1);
+  }
+}
+
+// Issues with displaying Futura in input
+::-webkit-input-placeholder {
+  line-height: 200%;
+}
+
+.cancel-button-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url('../../../icons/close.svg');
+  background: var(--st__neutral-fg1);
+}

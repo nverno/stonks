@@ -31,3 +31,8 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     });
   }
 });
+
+// chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+//   console.log('External: ', request);
+// }
+// );

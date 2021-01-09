@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= htmlWebpackPlugin.tags.headTags %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <section class="search-section">
+          <form id="search-form">
+            <input type="text" class="search-input" placeholder="Search...">
+          </form>
+
+          <button class="cancel-button">
+            <div class="cancel-button-icon"></div>
+          </button>
+        </section>
+
+        <section class="stock-section">
+        </section>
+
+        <section class="stock-reactions">
+          <div class="row">
+
+            <div class="col-md-6">
+              <section class="stock-socials">
+              </section>
+            </div>
+
+            <div class="col-md-6">
+              <section class="stock-socials"></section>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Only inject index.bundle.js -->
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+  </body>
+</html>

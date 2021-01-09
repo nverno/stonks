@@ -6,7 +6,7 @@
   right: 12px;
   botton: initial;
   left: initial;
-  z-index: 1999 !important;
+  z-index: 2147483647!important;
   display: block;
   border: none;
   border-radius: 20px;
@@ -22,20 +22,4 @@
     position: fixed;
     min-height: 100%;
   }
-}
-
-.cancel-container {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  z-index: 1999;
-  cursor: pointer;
-}
-
-.cancel-button-icon {
-  width: 24px;
-  height: 24px;
-  z-index: 2000;
-  -webkit-mask-image: url('../icons/close.svg');
-  fill: var(--st__neutral-fg1);
 }

@@ -1,4 +1,4 @@
-import popupContainer from './popup_container.html';
+// import popupContainer from './popup_container.html';
 import CloseIcon from '../icons/close.svg';
 import '../css/popup.scss';
 
@@ -14,8 +14,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'popup') {
     togglePopup();
     sendResponse({ popup: true });
+  } else if (request.type === 'close') {
+    closePopup();
+    sendResponse({ popup: 'closed' });
   }
+
+  return false;
 });
+
+const closePopup = () => {
+  console.log('closing popup');
+  let popup = document.querySelector('.popup-container');
+  if (popup) document.body.removeChild(popup);
+};
 
 const togglePopup = () => {
   let popup = document.querySelector('.popup-container');
@@ -27,18 +38,18 @@ const togglePopup = () => {
     popup.innerHTML = `
 <iframe id="popup-content"></iframe>
 <div class="cancel-container">
-  <img src=${CloseIcon} class="cancel-button-icon">
+  <img src="${CloseIcon}" class="cancel-button-icon">
 </div>
 `;
-    console.log('html:', popup.innerHTML);
     document.body.appendChild(popup);
 
     const iframe = document.getElementById('popup-content');
     iframe.src = chrome.extension.getURL('../build/index.html');
     iframe.frameBorder = 0;
 
-    popup.querySelector('.cancel-container').addEventListener('click', () => {
-      document.body.removeChild(popup);
-    });
+    // iframe.querySelector('.cancel-button').addEventListener('click', () => {
+    //   console.log('clicked cancel');
+    //   document.body.removeChild(popup);
+    // });
   }
 };

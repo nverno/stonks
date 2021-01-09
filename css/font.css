@@ -21,3 +21,17 @@
   src: local('Futura Heavy'), local('Futura-Heavy'),
     url('../fonts/FuturaLT-Bold.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'ClipperSoleil';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Soleil.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'ClipperSoleil';
+  src: url(../fonts/Soleil-Italic.woff2) format('woff2');
+  font-style: italic;
+  font-weight: 400;
+}

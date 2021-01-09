@@ -1,0 +1,36 @@
+@import "~bootstrap";
+
+@import './reset.scss';
+@import '../../../css/font.css';
+@import '../../../css/theme.scss';
+@import './search.scss';
+
+section {
+  border: 1px solid white;
+}
+
+button, input, select, textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  appearance: none;  
+}
+
+.stock-section {
+  height: 500px;
+}
+
+.stock-socials {
+  height: 300px;
+}
+
+.stock-news {
+  height: 300px;
+}
