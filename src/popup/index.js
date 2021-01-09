@@ -7,7 +7,14 @@ import './css/main.scss';
 
 $(document).ready(function () {
   window.AvAPI = AvAPI;
-  window.av = new AvAPI('QW2CN9WOPTMGPWFI');
+  window.avAPIkey = null;
+  // FIXME: prompt for API key if doesn't exist
+  // chrome.storage.sync.set({ avAPIkey: 'QW2CN9WOPTMGPWFI'});
+  chrome.storage.sync.get('avAPIkey', function (result) {
+    console.log('fetched av API key: ', result);
+    window.avAPIkey = result['avAPIkey'];
+    window.av = new AvAPI(window.avAPIkey);
+  });
 
   $('#search-form').on('submit', async function (e) {
     e.preventDefault();

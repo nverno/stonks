@@ -57,6 +57,7 @@ class AvAPI {
 
     const url = this.createUrl(params);
     const res = await fetch(url);
+    if (!res.ok) throw new Error(`API Error: ${res.status}`);
     const data = await res.json();
 
     if (typeof data['Error Message'] !== 'undefined') {
