@@ -8,12 +8,38 @@
   </head>
   <body>
     <div id="root">
-      <section class="search-section">
-        <form id="search-form">
-          <input class="search" placeholder="Search...">
-        </form>
-      </section>
+      <div class="container">
+        <section class="search-section">
+          <form id="search-form">
+            <input type="text" class="search-input" placeholder="Search...">
+          </form>
+
+          <button class="cancel-button">
+            <div class="cancel-button-icon"></div>
+          </button>
+        </section>
+
+        <section class="stock-section">
+        </section>
+
+        <section class="stock-reactions">
+          <div class="row">
+
+            <div class="col-md-6">
+              <section class="stock-socials">
+              </section>
+            </div>
+
+            <div class="col-md-6">
+              <section class="stock-socials"></section>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
     </div>
+
     <!-- Only inject index.bundle.js -->
     <script src="index.bundle.js"></script>
   </body>
