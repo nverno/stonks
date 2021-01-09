@@ -7,10 +7,15 @@ import './css/main.scss';
 
 $(document).ready(function () {
   window.AvAPI = AvAPI;
+  window.av = new AvAPI('QW2CN9WOPTMGPWFI');
 
-  $('#search-form').on('submit', function () {
-    const search = $('.search').val();
+  $('#search-form').on('submit', async function (e) {
+    e.preventDefault();
+    const search = $('.search-input').val();
+    $('.search-input').val('');
     console.log('searching for: ', search);
+    let results = await av.search(search);
+    console.log('Results: ', results);
   });
 
   $('.cancel-button').on('click', cancelFrame);

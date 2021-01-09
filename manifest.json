@@ -28,6 +28,10 @@
     "128": "icons/stonks.png"
   },
   "devtools_page": "html/devtools.html",
+  "options_ui": {
+    "page": "fancy-settings/source/index.html",
+    "open_in_tab": true
+  },
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {

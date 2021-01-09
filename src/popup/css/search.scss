@@ -11,9 +11,9 @@
   color: var(--st__neutral-fg1);
 }
 
-input[type='text'] {
-  line-height: 40px;
-}
+// input[type='text'] {
+//   line-height: 40px;
+// }
 
 .search-input {
   display: block;
@@ -35,7 +35,7 @@ input[type='text'] {
 
   &:focus {
     background-color: var(--st__neutral-pressed-bg1);
-    border: 1px solid var(--st__neutral-fg1);
+    border: 1px dotted var(--st__neutral-fg3);
   }
 }
 
