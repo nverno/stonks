@@ -1,0 +1,20 @@
+<div>
+  <div class="fade-in">
+    <div class="search-menu">
+      <% if (stocks.length || funds.length) { %>
+        <div class="search-results" role="option">
+          <% if (stocks.length) { %>
+            <%= searchMenuSection({ section: 'Stocks', results: stocks }) %>
+          <% } %>
+          <% if (funds.length) { %>
+            <%= searchMenuSection({ section: 'Funds', results: funds }) %>
+          <% } %>
+        </div>
+      <% } else { %>
+        <section>
+          <h4>No matches found</h4>
+        </section>
+      <% } %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -28,12 +29,23 @@ module.exports = {
       chunks: ['index'],
       inject: false,
     }),
+    // new webpack.ProvidePlugin({
+    //   _: 'underscore',
+    // }),
   ],
   devServer: {
     contentBase: './build',
   },
   module: {
     rules: [
+      {
+        test: /\.ejs$/,
+        loader: 'ejs-loader',
+        exclude: /(node_modules)/,
+        options: {
+          esModule: false,
+        },
+      },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,

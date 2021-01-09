@@ -3,11 +3,10 @@
 @import './reset.scss';
 @import '../../../css/font.css';
 @import '../../../css/theme.scss';
-@import './search.scss';
 
-section {
-  border: 1px solid white;
-}
+// section {
+//   border: 1px solid white;
+// }
 
 button, input, select, textarea {
   color: inherit;
@@ -21,6 +20,40 @@ button, input, select, textarea {
   background-color: transparent;
   border: none;
   appearance: none;  
+}
+
+.cancel-button-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url('../../../icons/close.svg');
+  background: var(--st__neutral-fg1);
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .stock-section {

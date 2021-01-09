@@ -1,0 +1,25 @@
+<section>
+  <h4><%= section %></h4>
+</section>
+<% results.forEach(function({ symbol, name, type, region }) { %>
+  <div class="search-result">
+    <div class="search-result-symbol">
+      <span>
+        <% symbol.forEach(function(part) { %>
+          <span class="<%= part.match ? 'search-match' : '' %>">
+            <%= part.value %>
+          </span>
+        <% }); %>
+      </span>
+    </div>
+    <div class="search-result-company">
+      <span>
+        <% name.forEach(function(part) { %>
+          <span class="<%= part.match ? 'search-match' : '' %>">
+            <%= part.value %>
+          </span>
+        <% }); %>
+      </span>
+    </div>
+  </div>
+<% }); %>

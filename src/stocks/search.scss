@@ -1,7 +1,11 @@
 .search-section {
-  display: flex;
-  justify-content: center;
   padding: 10px 0 10px 0;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px 0 20px;
+  }
 }
 
 #search-form {
@@ -34,7 +38,7 @@
   }
 
   &:focus {
-    background-color: var(--st__neutral-pressed-bg1);
+    background-color: var(--st__neutral-hover-bg1);
     border: 1px dotted var(--st__neutral-fg3);
   }
 }
@@ -44,12 +48,38 @@
   line-height: 200%;
 }
 
-.cancel-button-icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-mask-image: url('../../../icons/close.svg');
-  background: var(--st__neutral-fg1);
+.search-menu {
+  padding: 0 24px 24px;
+
+  & section {
+    margin: 12px 0 24px;
+  }
+
+  & h4 {
+    color: var(--st__neutral-fg2);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+}
+
+.search-results {
+}
+.search-result {
+  display: flex;
+
+  &:hover {
+    background-color: var(--st__neutral-bg2);
+  }
+}
+.search-result-symbol {
+  flex: 0 0 80px;
+}
+.search-result-company {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.search-match {
+  color: var(--st__primary-base);
 }
