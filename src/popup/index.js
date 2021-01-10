@@ -1,12 +1,17 @@
 import $ from 'jquery';
+import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
 import AvAPI from '../stocks/av_api';
-import { handleSearch } from '../stocks/search';
+import { handleSearch } from '../search/search';
+import { createChart } from '../stocks/stock_chart';
 
 // import Icon from '../../icons/stonks.png';
 import './css/main.scss';
 
 $(document).ready(function () {
+  // BEGIN testing
+  window.$ = $;
+  // END testing
   window.AvAPI = AvAPI;
   window.avAPIkey = null;
   // FIXME: prompt for API key if doesn't exist
@@ -21,17 +26,21 @@ $(document).ready(function () {
   }
   window.av = new AvAPI(window.avAPIkey);
 
-  $('#search-form').on('submit', handleSearch);
-  //                    async function (e) {
-  // e.preventDefault();
-  // const search = $('.search-input').val();
-  // $('.search-input').val('');
-  // console.log('searching for: ', search);
-  // let results = await av.search(search);
-  // console.log('Results: ', results);
-  // });
-
+  // header section
   $('.cancel-button').on('click', cancelFrame);
+  $('#search-form').on('submit', handleSearch);
+
+  // stock chart
+  $('.current-symbol').change(function () {
+    const symbol = $('.current-symbol').attr('value');
+    if (symbol.length) {
+      createChart(symbol);
+    } else {
+      console.log('current-symbol reset');
+    }
+  });
+
+  // socials
 });
 
 function cancelFrame(e) {

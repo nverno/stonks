@@ -1,3 +1,9 @@
+/**
+ * Handles searching for companies/symbols.
+ * When a selection is made, the `current-symbol` is updated on the page
+ * with the result;
+ */
+
 import $ from 'jquery';
 import _ from 'lodash';
 import searchMenu from './search_menu.ejs';
@@ -48,6 +54,8 @@ const formatResults = (query, results) => {
   });
 };
 
+const closeMenu = () => $('.search-results').empty();
+
 const createMenu = (query, results) => {
   let searchResults = $('.search-results');
   searchResults.empty();
@@ -55,8 +63,8 @@ const createMenu = (query, results) => {
     'type',
     'Equity',
   ]);
-  console.log('stocks: ', stocks);
-  console.log('funds: ', funds);
+  // console.log('stocks: ', stocks);
+  // console.log('funds: ', funds);
 
   searchResults.append(
     searchMenu({
@@ -65,6 +73,15 @@ const createMenu = (query, results) => {
       searchMenuSection: searchMenuSection,
     })
   );
+
+  $('.search-result').on('click', function (e) {
+    e.preventDefault();
+    const result = $(this).attr('value');
+    // console.log('Chose result: ', result);
+    $('.current-symbol').attr('value', result);
+    $('.current-symbol').trigger('change');
+    closeMenu();
+  });
 };
 
 export async function handleSearch(e) {
@@ -77,12 +94,13 @@ export async function handleSearch(e) {
     let results = await window.av.search(query);
     console.log('results: ', results);
     if (results.length === 1) {
-      $('.search-results').empty();
-      // TODO: use Object.values(results)[0].symbol
+      $('.current-symbol').attr('value', Object.values(results)[0].symbol);
+      $('.current-symbol').trigger('change');
+      closeMenu();
     } else {
       createMenu(query, results);
     }
   } else {
-    $('.search-results').empty();
+    closeMenu();
   }
 }

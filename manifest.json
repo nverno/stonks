@@ -2,7 +2,12 @@
   "name": "Stonks",
   "version": "0.0.1",
   "description": "Watch your stonks",
-  "permissions": ["storage", "contextMenus", "activeTab"],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "https://canvasjs.com/"
+  ],
   "web_accessible_resources": ["*.html"],
   "content_security_policy": "script-src 'self' 'sha256-/13BBW2yQVtpCsBV7JiO23y7pwEFFUobOzefJ27Nltg='; object-src 'self'",
   "content_scripts": [

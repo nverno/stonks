@@ -1,8 +1,8 @@
 <section>
   <h4><%= section %></h4>
 </section>
-<% results.forEach(function({ symbol, name, type, region }) { %>
-  <div class="search-result">
+<% results.forEach(function({ value, symbol, name, type, region }) { %>
+  <div class="search-result" value="<%= value %>" role="option">
     <div class="search-result-symbol">
       <span>
         <% symbol.forEach(function(part) { %>

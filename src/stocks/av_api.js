@@ -27,10 +27,6 @@ var fetch;
 if (typeof window === 'undefined') fetch = require('node-fetch');
 else fetch = window.fetch;
 
-// Cleanup search/quote results
-const cleanSearch = (results) =>
-  results.map((res) => mapKeys(res, (_, k) => k.slice(3).replace(/ /g, '_')));
-
 // remove preceding list index and replace spaces with '_'
 const cleanQuote = (quote) =>
   mapKeys(quote, (_, k) => k.slice(4).replace(/ /g, '_'));
@@ -56,6 +52,8 @@ class AvAPI {
     }
 
     const url = this.createUrl(params);
+    console.log('AV API: ', url);
+
     const res = await fetch(url);
     if (!res.ok) throw new Error(`API Error: ${res.status}`);
     const data = await res.json();
@@ -69,6 +67,13 @@ class AvAPI {
     return data;
   }
 
+  // Cleanup search/quote results
+  _cleanSearch(results) {
+    return results.map((res) =>
+      mapKeys(res, (_, k) => k.slice(3).replace(/ /g, '_'))
+    );
+  }
+
   async search(query) {
     const params = {
       function: 'SYMBOL_SEARCH',
@@ -78,7 +83,58 @@ class AvAPI {
     let res = await this.sendRequest(params);
     console.log('Res: ', res);
 
-    return res['bestMatches'] ? cleanSearch(res['bestMatches']) : [];
+    return res['bestMatches'] ? this._cleanSearch(res['bestMatches']) : [];
+  }
+
+  // remove metadata and format for canvasJS chart
+  _cleanTimeSeries(results) {
+    let key = Object.keys(results).find(
+      (key) => key.indexOf('Time Series') !== -1
+    );
+    let data = results[key];
+
+    let price = [],
+      volume = [];
+    for (const [key, val] of Object.entries(data)) {
+      const date = new Date(key);
+      // x: date, y: open, high, low, close
+      price.push({
+        x: date,
+        y: [
+          Number(val['1. open']),
+          Number(val['2. high']),
+          Number(val['3. low']),
+          Number(val['4. close']),
+        ],
+      });
+      // x: date, y: volume
+      volume.push({
+        x: date,
+        y: Number(val['5. volume']),
+      });
+    }
+
+    return { price, volume };
+  }
+
+  async timeSeries(options) {
+    const series = {
+      intraday: 'TIME_SERIES_INTRADAY',
+      weekly: 'TIME_SERIES_WEEKLY',
+      monthly: 'TIME_SERIES_MONTHLY',
+    };
+
+    const params = {
+      function: series[options['series']] || series['intraday'],
+      interval: options['interval'] || '5min',
+      symbol: options['symbol'],
+      outputsize: options['outputsize'] || 'compact', // 'full'
+    };
+
+    let res = await this.sendRequest(params);
+    // console.log("res: ", res);
+
+    return this._cleanTimeSeries(res);
   }
 }
 

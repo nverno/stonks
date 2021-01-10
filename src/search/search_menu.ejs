@@ -2,7 +2,7 @@
   <div class="fade-in">
     <div class="search-menu">
       <% if (stocks.length || funds.length) { %>
-        <div class="search-results" role="option">
+        <div class="search-results">
           <% if (stocks.length) { %>
             <%= searchMenuSection({ section: 'Stocks', results: stocks }) %>
           <% } %>

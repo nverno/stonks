@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      type="text/javascript"
+      src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"
+    ></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        var stockChart = new CanvasJS.StockChart('chartContainer', {
+          title: {
+            text: 'CanvasJS StockChart',
+          },
+          charts: [
+            {
+              data: [
+                {
+                  type: 'spline',
+                  dataPoints: dataPoints,
+                },
+              ],
+            },
+          ],
+        });
+
+        stockChart.render();
+      };
+
+      var limit = 365; //increase number of dataPoints by increasing this
+      var x = new Date(2019, 00, 00),
+        y = 1000;
+      var dataPoints = [];
+      for (var i = 0; i < limit; i += 1) {
+        dataPoints.push({ x: x, y: y });
+        x = new Date(x.setDate(x.getDate() + 1));
+        y += Math.round(Math.random() * 10 - 5);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chartContainer" style="height: 400px; width: 100%"></div>
+  </body>
+</html>
