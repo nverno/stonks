@@ -10,16 +10,23 @@
     <div id="root">
       <div class="container">
         <section class="search-section">
-          <form id="search-form">
-            <input type="text" class="search-input" placeholder="Search...">
-          </form>
+          <header>
+            <form id="search-form">
+              <input type="text" class="search-input" placeholder="Search...">
+            </form>
 
-          <button class="cancel-button">
-            <div class="cancel-button-icon"></div>
-          </button>
+            <button class="cancel-button">
+              <div class="cancel-button-icon"></div>
+            </button>
+          </header>
+
+          <div class="search-results"></div>
+          <!-- This is updated whenever a search result is chosen -->
+          <div class="current-symbol"></div>
         </section>
 
-        <section class="stock-section">
+        <section class="stock-chart">
+          <div id="chart-container">
         </section>
 
         <section class="stock-reactions">
