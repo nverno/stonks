@@ -3,6 +3,7 @@ const options = [
   'avKey',
   'twitterConsumerKey',
   'twitterConsumerSecretKey',
+  'twitterBearerToken',
   'twitterAccessToken',
   'twitterAccessTokenSecret',
   'chartType',

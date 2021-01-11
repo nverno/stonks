@@ -8,31 +8,60 @@ var fetch;
 if (typeof window === 'undefined') fetch = require('node-fetch');
 else fetch = window.fetch;
 
-const BASE_URL = 'https://api.twitter.com/';
+// use proxy as workaround for cors
+const PROXY_URL = 'https://stormy-caverns-29630.herokuapp.com/';
+const BASE_URL = 'https://api.twitter.com';
 
 class TwitterAPI {
   constructor({
     twitterConsumerKey,
     twitterConsumerSecretKey,
-    twitterAccessToken,
-    twitterAccessTokenSecret,
+    // twitterAccessToken,
+    // twitterAccessTokenSecret,
+    twitterBearerToken,
   }) {
-    this.apiKeys = apiKeys;
-    // this.T = new Twit({
-    //   consumer_key: apiKeys.twitterConsumerKey,
-    //   consumer_secret: apiKeys.twitterConsumerSecretKey,
-    //   access_token: apiKeys.twitterAccessToken,
-    //   access_token_secret: apiKeys.twitterAccessTokenSecret,
-    //   timeout_ms: 60*1000,
-    //   strictSSL: true,
-    // });
+    this.consumerKey = twitterConsumerKey;
+    this.consumerSecretKey = twitterConsumerSecretKey;
+    this.bearerToken = twitterBearerToken;
   }
 
-  // async searchCashtag(cashtag) {
-  //   return this.T.get('search/tweets', {
-  //     q: `$${cashtag}`,
-  //   });
-  // }
+  // https://developer.twitter.com/en/docs/authentication/oauth-2-0/application-only
+  // 1. ${twitterConsumerKey}:${twitterConsumerSecretKey}
+  // 2. url encode
+  // 3. base64 encode
+  async getBearerToken() {
+    if (this.bearerToken) return new Promise.resolve(this.bearerToken);
+    if (!this.consumerKey || !this.consumerSecretKey)
+      throw new Error('No twitter API credentials');
+
+    let encoded = btoa(
+      encodeURI(this.twitterConsumerKey) +
+        ':' +
+        encodeURI(this.twitterConsumerSecretKey)
+    );
+
+    let resp = await fetch(`${BASE_URL}/oauth2/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+        Authorization: `Basic ${encoded}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: 'grant_type=client_credentials',
+    });
+
+    let json = await resp.json();
+    console.log('token: ', json);
+    return json.access_token;
+  }
+
+  // Lookup recent tweets containing cashtag
+  // this uses application-only auth with bearer token
+  async searchCashtag(cashtag) {
+    return this.T.get('search/tweets', {
+      q: `$${cashtag}`,
+    });
+  }
 }
 
 export default TwitterAPI;

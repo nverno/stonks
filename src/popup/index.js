@@ -25,7 +25,6 @@ $(document).ready(function () {
     window.avKey = 'QW2CN9WOPTMGPWFI';
   } else {
     loadOptions();
-    console.log('window.stonkOpts: ', window.stonkOpts);
   }
 
   // header section
@@ -38,6 +37,7 @@ $(document).ready(function () {
     if (symbol.length) {
       createChart(symbol);
     } else {
+      // XXX: clear page?
       console.log('current-symbol reset');
     }
   });
@@ -57,12 +57,13 @@ function cancelFrame(e) {
 }
 
 const any = (arr, fn = Boolean) => arr.some(fn);
-const loadOptions = async () => {
+const loadOptions = () => {
   chrome.storage.sync.get(
     [
       'avKey',
       'twitterConsumerKey',
       'twitterConsumerSecretKey',
+      'twitterBearerToken',
       'twitterAccessToken',
       'twitterAccessTokenSecret',
       'chartType',
@@ -70,15 +71,20 @@ const loadOptions = async () => {
     (res) => {
       for (const [key, val] of Object.entries(res)) {
         if (!val.length) {
-          console.log(`Failed to load API stonkOpts: ${key}`);
+          console.warn(`Failed to load API stonkOpts: ${key}`);
           createSetupButton();
         }
       }
       window.stonkOpts = res;
-      console.log('Loaded API stonkOpts: ', res);
+
       // initialize APIs
       window.av = new AvAPI(window.stonkOpts);
-      window.tweets = new TwitterAPI(window.stonkOpts);
+      try {
+        window.tweets = new TwitterAPI(window.stonkOpts);
+        // window.tweets.getBearerToken();
+      } catch (e) {
+        console.warn('Unable to initialize twitter API');
+      }
     }
   );
 };
