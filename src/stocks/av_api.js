@@ -34,8 +34,8 @@ const cleanQuote = (quote) =>
 const BASE_URL = 'https://www.alphavantage.co/query?';
 
 class AvAPI {
-  constructor(apiKey) {
-    this.apiKey = apiKey;
+  constructor({ avKey }) {
+    this.apiKey = avKey;
   }
 
   createUrl(params) {

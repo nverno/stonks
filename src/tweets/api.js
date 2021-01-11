@@ -4,7 +4,6 @@
 // const OAuth = require('oauth');
 // const OAuth2 = OAuth.OAuth2;
 // const Twit = require('twit');
-
 var fetch;
 if (typeof window === 'undefined') fetch = require('node-fetch');
 else fetch = window.fetch;
@@ -12,7 +11,12 @@ else fetch = window.fetch;
 const BASE_URL = 'https://api.twitter.com/';
 
 class TwitterAPI {
-  constructor(apiKeys) {
+  constructor({
+    twitterConsumerKey,
+    twitterConsumerSecretKey,
+    twitterAccessToken,
+    twitterAccessTokenSecret,
+  }) {
     this.apiKeys = apiKeys;
     // this.T = new Twit({
     //   consumer_key: apiKeys.twitterConsumerKey,

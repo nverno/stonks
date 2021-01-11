@@ -30,3 +30,11 @@ input {
   width: 50%;
   margin: 0 10% 0 4%;
 }
+
+.keys header p {
+  margin-left: 10px;
+}
+
+.twitter-keys {
+  margin-left: 10px;
+}

@@ -16,7 +16,7 @@ $(document).ready(function () {
   window.AvAPI = AvAPI;
   window.TwitterAPI = TwitterAPI;
   // END testing
-  window.apiKeys = {};
+  window.stonkOpts = {};
   window.tweets = null; // twitter API instance
   window.av = null; // alphavantage API instance
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
     window.avKey = 'QW2CN9WOPTMGPWFI';
   } else {
     loadOptions();
-    console.log('window.apiKeys: ', window.apiKeys);
+    console.log('window.stonkOpts: ', window.stonkOpts);
   }
 
   // header section
@@ -65,19 +65,20 @@ const loadOptions = async () => {
       'twitterConsumerSecretKey',
       'twitterAccessToken',
       'twitterAccessTokenSecret',
+      'chartType',
     ],
     (res) => {
       for (const [key, val] of Object.entries(res)) {
         if (!val.length) {
-          console.log(`Failed to load API apiKeys: ${key}`);
+          console.log(`Failed to load API stonkOpts: ${key}`);
           createSetupButton();
         }
       }
-      window.apiKeys = res;
-      console.log('Loaded API apiKeys: ', res);
+      window.stonkOpts = res;
+      console.log('Loaded API stonkOpts: ', res);
       // initialize APIs
-      window.av = new AvAPI(window.apiKeys['avKey']);
-      window.tweets = new TwitterAPI(window.apiKeys);
+      window.av = new AvAPI(window.stonkOpts);
+      window.tweets = new TwitterAPI(window.stonkOpts);
     }
   );
 };
@@ -93,7 +94,7 @@ const openOptionsPage = () => {
 const createSetupButton = () => {
   $('#root').empty();
   const optionsButton = $('<button/>', {
-    text: 'Click to setup API apiKeys',
+    text: 'Click to setup API keys/options',
     click: openOptionsPage,
   })
     .wrap('<div id="options"></div>')
