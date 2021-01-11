@@ -10,7 +10,7 @@ else fetch = window.fetch;
 
 // use proxy as workaround for cors
 const PROXY_URL = 'https://stormy-caverns-29630.herokuapp.com/';
-const BASE_URL = 'https://api.twitter.com';
+const BASE_URL = PROXY_URL + 'https://api.twitter.com';
 
 class TwitterAPI {
   constructor({
@@ -55,11 +55,16 @@ class TwitterAPI {
     return json.access_token;
   }
 
-  // Lookup recent tweets containing cashtag
+  // Lookup recent tweets containing query
   // this uses application-only auth with bearer token
-  async searchCashtag(cashtag) {
-    return this.T.get('search/tweets', {
-      q: `$${cashtag}`,
+  async searchTweets(query) {
+    if (!this.bearerToken)
+      throw new Error('Bearer token required for Twitter API');
+
+    return fetch(BASE_URL + '/1.1/search/tweets.json?q=$' + encodeURI(query), {
+      headers: {
+        Authorization: `Bearer ${this.bearerToken}`,
+      },
     });
   }
 }

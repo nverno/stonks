@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   if (!chrome.storage) {
     // Testing
-    window.avKey = 'QW2CN9WOPTMGPWFI';
+    window.avKey = '';
   } else {
     loadOptions();
   }
