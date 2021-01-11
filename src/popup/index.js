@@ -21,8 +21,8 @@ $(document).ready(function () {
   window.av = null; // alphavantage API instance
 
   if (!chrome.storage) {
-    // Testing
-    window.avKey = '';
+    // Testing: alphavantage API thinks a key with string 'null' is valid, lol
+    window.av = new AvAPI({ avKey: null });
   } else {
     loadOptions();
   }
