@@ -5,12 +5,14 @@ const options = [
   'twitterConsumerSecretKey',
   'twitterAccessToken',
   'twitterAccessTokenSecret',
+  'chartType',
 ];
 
 function save_options() {
   let keys = {};
   options.forEach((key) => {
-    keys[key] = document.getElementById(key).value;
+    const ele = document.getElementById(key);
+    keys[key] = ele.value || ele.checked;
   });
 
   chrome.storage.sync.set(keys, function () {
@@ -26,7 +28,9 @@ function save_options() {
 function restore_options() {
   chrome.storage.sync.get(options, function (items) {
     for (const [key, val] of Object.entries(items)) {
-      document.getElementById(key).value = val;
+      const ele = document.getElementById(key);
+      if (typeof ele['value'] !== 'undefined') ele.value = val;
+      else ele.checked = val;
     }
   });
 }
