@@ -92,5 +92,13 @@ module.exports = {
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '*'],
+    // fallback: {
+    //   assert: false,
+    //   fs: false,
+    //   https: require.resolve('https-browserify'),
+    //   http: require.resolve('http-browserify'),
+    //   tls: require.resolve('tls-browserify'),
+    //   crypto: require.resolve('crypto-browserify'),
+    // }
   },
 };

@@ -1,40 +1,34 @@
 // save options to chrome storage
-function save_options() {
-  const avKey = document.getElementById('avKey').value;
-  const twitterKey = document.getElementById('twitterKey').value;
-  const twitterSecretKey = document.getElementById('twitterSecretKey').value;
+const options = [
+  'avKey',
+  'twitterConsumerKey',
+  'twitterConsumerSecretKey',
+  'twitterAccessToken',
+  'twitterAccessTokenSecret',
+];
 
-  chrome.storage.sync.set(
-    {
-      avKey,
-      twitterKey,
-      twitterSecretKey,
-    },
-    function () {
-      // let user know options were saved
-      let status = document.getElementById('status');
-      status.textContent = 'Options saved';
-      setTimeout(() => {
-        status.textContent = '';
-      }, 750);
-    }
-  );
+function save_options() {
+  let keys = {};
+  options.forEach((key) => {
+    keys[key] = document.getElementById(key).value;
+  });
+
+  chrome.storage.sync.set(keys, function () {
+    // let user know options were saved
+    let status = document.getElementById('status');
+    status.textContent = 'Options saved';
+    setTimeout(() => {
+      status.textContent = '';
+    }, 750);
+  });
 }
 
 function restore_options() {
-  chrome.storage.sync.get(
-    {
-      avKey: '',
-      twitterKey: '',
-      twitterSecretKey: '',
-    },
-    function (items) {
-      document.getElementById('avKey').value = items.avKey;
-      document.getElementById('twitterKey').value = items.twitterKey;
-      document.getElementById('twitterSecretKey').value =
-        items.twitterSecretKey;
+  chrome.storage.sync.get(options, function (items) {
+    for (const [key, val] of Object.entries(items)) {
+      document.getElementById(key).value = val;
     }
-  );
+  });
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);

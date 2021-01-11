@@ -2,6 +2,8 @@ import $ from 'jquery';
 import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
 import AvAPI from '../stocks/av_api';
+import TwitterAPI from '../tweets/api';
+
 import { handleSearch } from '../search/search';
 import { createChart } from '../stocks/stock_chart';
 
@@ -11,9 +13,12 @@ import './css/main.scss';
 $(document).ready(function () {
   // BEGIN testing
   window.$ = $;
-  // END testing
   window.AvAPI = AvAPI;
+  window.TwitterAPI = TwitterAPI;
+  // END testing
   window.apiKeys = {};
+  window.tweets = null; // twitter API instance
+  window.av = null; // alphavantage API instance
 
   if (!chrome.storage) {
     // Testing
@@ -22,7 +27,6 @@ $(document).ready(function () {
     loadOptions();
     console.log('window.apiKeys: ', window.apiKeys);
   }
-  window.av = new AvAPI(window.apiKeys['avKey']);
 
   // header section
   $('.cancel-button').on('click', cancelFrame);
@@ -55,7 +59,13 @@ function cancelFrame(e) {
 const any = (arr, fn = Boolean) => arr.some(fn);
 const loadOptions = async () => {
   chrome.storage.sync.get(
-    ['avKey', 'twitterKey', 'twitterSecretKey'],
+    [
+      'avKey',
+      'twitterConsumerKey',
+      'twitterConsumerSecretKey',
+      'twitterAccessToken',
+      'twitterAccessTokenSecret',
+    ],
     (res) => {
       for (const [key, val] of Object.entries(res)) {
         if (!val.length) {
@@ -67,6 +77,7 @@ const loadOptions = async () => {
       console.log('Loaded API apiKeys: ', res);
       // initialize APIs
       window.av = new AvAPI(window.apiKeys['avKey']);
+      window.tweets = new TwitterAPI(window.apiKeys);
     }
   );
 };
