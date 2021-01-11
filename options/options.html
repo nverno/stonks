@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stonks Options</title>
+    <link rel="stylesheet" href="options.css" media="screen" />
+  </head>
+  <body>
+    <h3>API Keys</h3>
+    <div class="keys">
+      <div>
+        <h4>Alphavantage</h4>
+        <label
+          >API key
+          <input type="text" id="avKey" />
+        </label>
+      </div>
+
+      <div>
+        <h4>Twitter</h4>
+        <div class="twitter-keys">
+          <label
+            >API key
+            <input type="text" id="twitterKey" />
+          </label>
+
+          <label
+            >API secret key
+            <input type="text" id="twitterSecretKey" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+    <script src="options.js"></script>
+  </body>
+</html>

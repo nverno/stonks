@@ -34,7 +34,7 @@
   },
   "devtools_page": "html/devtools.html",
   "options_ui": {
-    "page": "fancy-settings/source/index.html",
+    "page": "options/options.html",
     "open_in_tab": true
   },
   "commands": {

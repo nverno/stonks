@@ -13,18 +13,16 @@ $(document).ready(function () {
   window.$ = $;
   // END testing
   window.AvAPI = AvAPI;
-  window.avAPIkey = null;
-  // FIXME: prompt for API key if doesn't exist
-  // chrome.storage.sync.set({ avAPIkey: 'QW2CN9WOPTMGPWFI'});
+  window.apiKeys = {};
+
   if (!chrome.storage) {
-    window.avAPIkey = 'QW2CN9WOPTMGPWFI';
+    // Testing
+    window.avKey = 'QW2CN9WOPTMGPWFI';
   } else {
-    chrome.storage.sync.get('avAPIkey', function (result) {
-      console.log('fetched av API key: ', result);
-      window.avAPIkey = result['avAPIkey'];
-    });
+    loadOptions();
+    console.log('window.apiKeys: ', window.apiKeys);
   }
-  window.av = new AvAPI(window.avAPIkey);
+  window.av = new AvAPI(window.apiKeys['avKey']);
 
   // header section
   $('.cancel-button').on('click', cancelFrame);
@@ -53,5 +51,43 @@ function cancelFrame(e) {
     });
   });
 }
+
+const any = (arr, fn = Boolean) => arr.some(fn);
+const loadOptions = async () => {
+  chrome.storage.sync.get(
+    ['avKey', 'twitterKey', 'twitterSecretKey'],
+    (res) => {
+      for (const [key, val] of Object.entries(res)) {
+        if (!val.length) {
+          console.log(`Failed to load API apiKeys: ${key}`);
+          createSetupButton();
+        }
+      }
+      window.apiKeys = res;
+      console.log('Loaded API apiKeys: ', res);
+      // initialize APIs
+      window.av = new AvAPI(window.apiKeys['avKey']);
+    }
+  );
+};
+
+const openOptionsPage = () => {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options/options.html'));
+  }
+};
+
+const createSetupButton = () => {
+  $('#root').empty();
+  const optionsButton = $('<button/>', {
+    text: 'Click to setup API apiKeys',
+    click: openOptionsPage,
+  })
+    .wrap('<div id="options"></div>')
+    .closest('div');
+  $('#root').append(optionsButton);
+};
 
 document.body.className = 'theme-open-up';
