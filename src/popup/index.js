@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import _ from 'lodash';
+import * as d3 from 'd3';
 import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
 import AvAPI from '../stocks/av_api';
@@ -6,6 +8,8 @@ import TwitterAPI from '../tweets/api';
 
 import { handleSearch } from '../search/search';
 import { createChart } from '../stocks/stock_chart';
+import * as util from '../tweets/util';
+import * as chart from '../tweets/chart';
 
 // import Icon from '../../icons/stonks.png';
 import './css/main.scss';
@@ -15,9 +19,13 @@ $(document).ready(function () {
   window.$ = $;
   window.AvAPI = AvAPI;
   window.TwitterAPI = TwitterAPI;
+  window.util = util;
+  window.chart = chart;
+  window._ = _;
+  window.d3 = d3;
   // END testing
   window.stonkOpts = {};
-  window.tweets = null; // twitter API instance
+  window.tweets = new TwitterAPI(); // twitter API instance
   window.av = null; // alphavantage API instance
 
   if (!chrome.storage) {
@@ -79,12 +87,12 @@ const loadOptions = () => {
 
       // initialize APIs
       window.av = new AvAPI(window.stonkOpts);
-      try {
-        window.tweets = new TwitterAPI(window.stonkOpts);
-        // window.tweets.getBearerToken();
-      } catch (e) {
-        console.warn('Unable to initialize twitter API');
-      }
+      // try {
+      //   window.tweets = new TwitterAPI(window.stonkOpts);
+      //   // window.tweets.getBearerToken();
+      // } catch (e) {
+      //   console.warn('Unable to initialize twitter API');
+      // }
     }
   );
 };

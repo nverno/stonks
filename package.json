@@ -78,9 +78,11 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "d3": "^6.3.1",
     "ejs": "^3.1.5",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "url": "^0.11.0"
   },
   "jest": {
     "coverageDirectory": "./coverage",
