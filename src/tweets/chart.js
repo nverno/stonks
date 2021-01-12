@@ -86,5 +86,8 @@ export const barChart = ({ data }, options = defaults) => {
 
   svg.append('g').call(yAxis);
 
-  return svg.node();
+  const node = svg.node();
+  document.getElementById('cashtags').append(node);
+
+  return node;
 };
