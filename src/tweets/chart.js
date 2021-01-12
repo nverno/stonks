@@ -2,15 +2,16 @@ import * as d3 from 'd3';
 import { cleanTweets, groupByHour } from './util';
 import API from './api';
 
-const margin = {
-  top: 30,
-  right: 0,
-  bottom: 30,
-  left: 40,
+const defaults = {
+  height: 300,
+  width: 600,
+  margin: {
+    top: 30,
+    right: 0,
+    bottom: 30,
+    left: 40,
+  },
 };
-const width = 400;
-const height = 400;
-const defaults = { height, width, margin };
 
 export const getData = async (symbol) => {
   const api = new API({});
