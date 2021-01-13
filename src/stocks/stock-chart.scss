@@ -1,0 +1,15 @@
+.stock-chart {
+  width: 100%;
+  height: auto;
+}
+
+#chart-container {
+  max-height: 400px;
+  height: 100%;
+  width: 100%;
+}
+
+.canvasjs-stock-container canvas {
+  height: 300px;
+  // width: 100%;
+}

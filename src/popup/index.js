@@ -5,9 +5,9 @@ import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
 import AvAPI from '../stocks/av_api';
 import TwitterAPI from '../tweets/api';
-
+import { createTweetChart } from '../tweets/chart';
 import { handleSearch } from '../search/search';
-import { createChart } from '../stocks/stock_chart';
+import { createStockChart } from '../stocks/stock_chart';
 import * as util from '../tweets/util';
 import * as chart from '../tweets/chart';
 
@@ -43,7 +43,8 @@ $(document).ready(function () {
   $('.current-symbol').change(function () {
     const symbol = $('.current-symbol').attr('value');
     if (symbol.length) {
-      createChart(symbol);
+      createStockChart(symbol);
+      createTweetChart(symbol);
     } else {
       // XXX: clear page?
       console.log('current-symbol reset');

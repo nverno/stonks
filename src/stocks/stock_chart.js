@@ -1,18 +1,18 @@
 /**
  * Stock chart using CanvasJS
  */
-import './chart.scss';
+import './stock-chart.scss';
 
 // Note: window.av currently has AvAPI instance!
 
-export const createChart = async (symbol) => {
+export const createStockChart = async (symbol) => {
   let { price, volume } = await window.av.timeSeries({
     symbol,
     series: 'intraday',
     outputsize: 'full',
   });
-  console.log('price: ', price);
-  console.log('volume: ', volume);
+  // console.log('price: ', price);
+  // console.log('volume: ', volume);
 
   const latest = price[0]['y'][3];
   const isPositive = latest > price[price.length - 1]['y'][3];

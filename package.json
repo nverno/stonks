@@ -6,10 +6,10 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "npm run test -- --coverage",
-    "webpack": "webpack --watch --mode=development",
+    "webpack": "webpack --watch --mode=development --env production",
     "postinstall": "webpack",
     "build": "webpack",
-    "start": "webpack serve --open",
+    "start": "webpack serve --open --env production",
     "format": "prettier --write \"**/**/**/*.+(js|json|css|html)\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

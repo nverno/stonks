@@ -48,3 +48,21 @@ export const groupByHour = ({ data }) => {
     })),
   };
 };
+
+export const groupByMinutes = ({ data }, minutes) => {
+  const groups = _.groupBy(data, ({ createdAt }) => {
+    let d = new Date(createdAt);
+    const mins = Math.floor(d.getMinutes() / minutes);
+    d.setMinutes(d.getMinutes() - mins);
+    d.setSeconds(0);
+    return d;
+  });
+
+  return {
+    groups,
+    grouped: Object.keys(groups).map((key) => ({
+      name: key,
+      value: groups[key].length,
+    })),
+  };
+};
