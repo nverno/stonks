@@ -1,6 +1,7 @@
 /**
  * Stock chart using CanvasJS
  */
+import $ from 'jquery';
 import './stock-chart.scss';
 
 // Note: window.av currently has AvAPI instance!
@@ -18,6 +19,7 @@ export const createStockChart = async (symbol) => {
   const isPositive = latest > price[price.length - 1]['y'][3];
   const beg = price[price.length - 1]['x'];
   const end = price[0]['x'];
+  $('#chart-container').css('min-height', '400px');
 
   const stockChart = new CanvasJS.StockChart('chart-container', {
     theme: 'dark1',

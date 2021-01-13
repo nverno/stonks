@@ -4,12 +4,12 @@
 }
 
 #chart-container {
-  max-height: 400px;
-  height: 100%;
+  // min-height: 400px;
+  // height: 400px;
   width: 100%;
 }
 
 .canvasjs-stock-container canvas {
-  height: 300px;
+  // min-height: 300px;
   // width: 100%;
 }
