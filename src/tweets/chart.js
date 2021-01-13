@@ -1,9 +1,18 @@
-import * as d3 from 'd3';
-import { cleanTweets, groupByHour } from './util';
+import { cleanTweets, groupByHour, groupByMinutes } from './util';
 import API from './api';
+// const d3 = require('d3');
+import * as d3 from 'd3';
+import './chart.scss';
+
+// BEGIN testing
+import grouped from './__test__/grouped';
+document.addEventListener('DOMContentLoaded', () => {
+  window.grouped = grouped;
+});
+// END testing
 
 const defaults = {
-  height: 300,
+  height: 200,
   width: 600,
   margin: {
     top: 30,
@@ -13,13 +22,22 @@ const defaults = {
   },
 };
 
-export const getData = async (symbol) => {
+// create frequency chart for tweets over the last hour
+export const createTweetChart = async (symbol) => {
+  let { data, groups, grouped } = await getTweetData(symbol);
+  const node = barChart({ data: grouped });
+  document.getElementById('cashtags').appendChild(node);
+  return node;
+};
+
+// Get tweets from last hour, capped at 100
+export const getTweetData = async (symbol) => {
   const api = new API({});
-  let resp = await api.recentCashtag(symbol);
-  let json = await resp.json();
-  console.log('json: ', json);
+  let json = await api.lastHour(symbol);
+
+  // console.log('json: ', json);
   let data = cleanTweets(symbol, json);
-  let { groups, grouped } = groupByHour(data);
+  let { groups, grouped } = groupByMinutes(data, 30);
 
   return {
     data,
@@ -29,7 +47,7 @@ export const getData = async (symbol) => {
 };
 
 // Data should be { name: <group>, value: <barheight> }
-export const barChart = ({ data }, options = defaults) => {
+const barChart = ({ data }, options = defaults) => {
   const { width, height, margin } = options;
   // FIXME: how to use CSS variables in svg?
   const svg = d3
@@ -53,8 +71,8 @@ export const barChart = ({ data }, options = defaults) => {
     g.attr('transform', `translate(0, ${height - margin.bottom})`).call(
       d3
         .axisBottom(x)
-        .tickFormat((i) => data[i].name)
-        .tickSizeOuter(0)
+        .tickFormat((i) => d3.timeFormat('%H:%M')(new Date(data[i].name)))
+        .tickSizeOuter(1)
     );
 
   const yAxis = (g) =>
@@ -88,7 +106,5 @@ export const barChart = ({ data }, options = defaults) => {
   svg.append('g').call(yAxis);
 
   const node = svg.node();
-  document.getElementById('cashtags').append(node);
-
   return node;
 };
