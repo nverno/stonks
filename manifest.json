@@ -9,7 +9,7 @@
     "https://canvasjs.com/"
   ],
   "web_accessible_resources": ["*.html"],
-  "content_security_policy": "script-src 'self' 'sha256-/13BBW2yQVtpCsBV7JiO23y7pwEFFUobOzefJ27Nltg='; object-src 'self'; default-src 'self'",
+  "content_security_policy": "script-src 'self' 'sha256-/13BBW2yQVtpCsBV7JiO23y7pwEFFUobOzefJ27Nltg='; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

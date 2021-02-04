@@ -2,6 +2,25 @@ body {
   padding-left: 10px;
 }
 
+label > input {
+  margin-top: 3px;
+}
+
+.watchlist {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.watchlist label {
+  width: 30%;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+.keys label + input {
+  width: 50%;
+  margin: 0 10% 0 4%;
+}
+
 .keys {
   display: flex;
   flex-direction: column;

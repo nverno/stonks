@@ -5,9 +5,11 @@ import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
 import AvAPI from '../stocks/av_api';
 import TwitterAPI from '../tweets/api';
+import { createWatchlist } from '../watchlist/watchlist';
 import { createTweetChart } from '../tweets/chart';
 import { handleSearch } from '../search/search';
-import { createStockChart } from '../stocks/stock_chart';
+import { createStockChart } from '../chart/stock_chart';
+import { defaultSettings, loadSettings } from '../settings';
 import * as quote from '../stocks/quote';
 import * as util from '../tweets/util';
 import * as chart from '../tweets/chart';
@@ -26,16 +28,10 @@ $(document).ready(function () {
   window.d3 = d3;
   window.quote = quote;
   // END testing
-  window.stonkOpts = {};
+
   window.tweets = new TwitterAPI(); // twitter API instance
   window.av = null; // alphavantage API instance
-
-  if (!chrome.storage) {
-    // Testing: alphavantage API thinks a key with string 'null' is valid, lol
-    window.av = new AvAPI({ avKey: null });
-  } else {
-    loadOptions();
-  }
+  loadSettings(loadingCallback);
 
   // header section
   $('.cancel-button').on('click', cancelFrame);
@@ -53,6 +49,8 @@ $(document).ready(function () {
     }
   });
 
+  createWatchlist(window.stonks.tickers);
+
   // socials
 });
 
@@ -67,37 +65,29 @@ function cancelFrame(e) {
   });
 }
 
-const any = (arr, fn = Boolean) => arr.some(fn);
-const loadOptions = () => {
-  chrome.storage.sync.get(
-    [
-      'avKey',
-      'twitterConsumerKey',
-      'twitterConsumerSecretKey',
-      'twitterBearerToken',
-      'twitterAccessToken',
-      'twitterAccessTokenSecret',
-      'chartType',
-    ],
-    (res) => {
-      for (const [key, val] of Object.entries(res)) {
-        if (!val.length) {
-          console.warn(`Failed to load API stonkOpts: ${key}`);
-          createSetupButton();
-        }
-      }
-      window.stonkOpts = res;
+const loadingCallback = (settings) => {
+  // XXX: currently none are required!
+  // for (const [key, val] of Object.entries(items)) {
+  //   if (!val.length) {
+  //     console.warn(`Failed to load API stonks: ${key}`);
+  //     createSetupButton();
+  //   }
+  // }
+  window.stonks = settings || {};
 
-      // initialize APIs
-      window.av = new AvAPI(window.stonkOpts);
-      // try {
-      //   window.tweets = new TwitterAPI(window.stonkOpts);
-      //   // window.tweets.getBearerToken();
-      // } catch (e) {
-      //   console.warn('Unable to initialize twitter API');
-      // }
-    }
-  );
+  // initialize APIs
+  if (!chrome.storage) {
+    // Testing: alphavantage API thinks a key with string 'null' is valid, lol
+    window.av = new AvAPI({ avKey: null });
+    if (window.stonks.tickers)
+      window.stonks.tickers = window.stonks.tickers.split(',');
+  } else {
+    window.av = new AvAPI(window.stonks);
+  }
+
+  // defaults
+  if (!window.stonks['tickers'])
+    window.stonks['tickers'] = defaultSettings.tickers;
 };
 
 const openOptionsPage = () => {

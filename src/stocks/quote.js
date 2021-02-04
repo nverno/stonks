@@ -20,13 +20,16 @@ const createUrl = (params) => {
   );
 };
 
-export const getQuotes = async (symbols) => {
+export const fetchQuotes = async (symbols) => {
   const url = createUrl({ symbols });
-  console.log('QUOTE API: ', url);
+  // console.log('QUOTE API: ', url);
 
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API Error: ${res.status}`);
-  const data = await res.json();
 
-  return data;
+  const data = await res.json();
+  const response = data['quoteResponse'];
+  if (response['error']) throw new Error(`API Error: ${response['error']}`);
+
+  return response.result;
 };

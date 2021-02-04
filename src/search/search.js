@@ -5,7 +5,7 @@
  */
 
 import $ from 'jquery';
-import _ from 'lodash';
+import { partition } from 'lodash';
 import searchMenu from './search_menu.ejs';
 import searchMenuSection from './search_menu_section.ejs';
 import './search.scss';
@@ -59,7 +59,7 @@ const closeMenu = () => $('.search-results').empty();
 const createMenu = (query, results) => {
   let searchResults = $('.search-results');
   searchResults.empty();
-  let [stocks, funds] = _.partition(formatResults(query, results), [
+  let [stocks, funds] = partition(formatResults(query, results), [
     'type',
     'Equity',
   ]);
