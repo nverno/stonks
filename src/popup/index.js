@@ -8,6 +8,7 @@ import TwitterAPI from '../tweets/api';
 import { createTweetChart } from '../tweets/chart';
 import { handleSearch } from '../search/search';
 import { createStockChart } from '../stocks/stock_chart';
+import * as quote from '../stocks/quote';
 import * as util from '../tweets/util';
 import * as chart from '../tweets/chart';
 
@@ -23,6 +24,7 @@ $(document).ready(function () {
   window.chart = chart;
   window._ = _;
   window.d3 = d3;
+  window.quote = quote;
   // END testing
   window.stonkOpts = {};
   window.tweets = new TwitterAPI(); // twitter API instance
