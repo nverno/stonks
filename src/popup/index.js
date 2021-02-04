@@ -31,6 +31,7 @@ $(document).ready(function () {
 
   window.tweets = new TwitterAPI(); // twitter API instance
   window.av = null; // alphavantage API instance
+  window.timeout = null; // updating quotes
   loadSettings(loadingCallback);
 
   // header section
@@ -49,7 +50,7 @@ $(document).ready(function () {
     }
   });
 
-  createWatchlist(window.stonks.tickers);
+  createWatchlist();
 
   // socials
 });
@@ -86,8 +87,10 @@ const loadingCallback = (settings) => {
   }
 
   // defaults
-  if (!window.stonks['tickers'])
-    window.stonks['tickers'] = defaultSettings.tickers;
+  window.stonks = {
+    ...defaultSettings,
+    ...window.stonks,
+  };
 };
 
 const openOptionsPage = () => {

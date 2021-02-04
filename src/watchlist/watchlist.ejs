@@ -1,7 +1,7 @@
-<div class="fade-in">
+<div>
     <div class="list">
-        <% assets.forEach(function(asset) { %>
-            <%= quoteCell(asset) %>
+        <% quotes.forEach(function(quote) { %>
+            <%= quoteCell({ quote }) %>
         <% }); %>
     </div>
 </div>

@@ -25,7 +25,32 @@
 }
 
 .quote {
+  text-align: right;
+  // display: flex;
+  // flex-direction: column;
+  // background-color: green;
+}
+
+.quote-name {
   display: flex;
   flex-direction: column;
-  background-color: green;
+  flex: 0 0 40%;
+  span:not(:first-child) {
+    color: var(--st__neutral-fg3);
+  }
+}
+
+.price-change {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  div:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+.after-hours {
+  span:not(:first-child) {
+    color: var(--st__neutral-fg2);
+  }
 }

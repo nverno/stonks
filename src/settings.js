@@ -1,6 +1,6 @@
 const defaultSettings = {
   tickers: ['TSLA', 'FTOC', 'AMC', 'GME'],
-  updateInterval: 10 * 1000,
+  updateInterval: 5,
 };
 
 var chrome;
