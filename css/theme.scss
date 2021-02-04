@@ -50,6 +50,20 @@
   --st__primary-lightest-base: rgba(255, 80, 0, 0.1);
 }
 
+.positive {
+  color: var(--st__semantic-positive-base);
+}
+.positive-light {
+  color: var(--st__semantic-positive-light);  
+}
+
+.negative {
+  color: var(--st__semantic-negative-base);
+}
+.negative-light {
+  color: var(--st__semantic-negative-light);
+}
+
 body {
   font-family: 'Futura', sans-serif;
   font-size: 14px;

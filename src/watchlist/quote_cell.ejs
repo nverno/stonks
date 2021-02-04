@@ -1,0 +1,39 @@
+<div class="quote-cell">
+    <div class="quote-name">
+        <span class="ticker"><%= quote.symbol %></span>
+        <span class="company"><%= quote.shortName %></span>
+    </div>
+
+    <div class="quote">
+        <!--         $price
+             $change %change -->
+        <div>
+            <!-- Temporarily highlight prices that changed on update -->
+            <span class="price <%= quote.updated && quote.className %>">
+                <%= quote.price %>
+            </span>
+        </div>
+
+        <div class="price-change">
+            <div>
+                <span class="<%= quote.className %>">
+                    <%= quote.change %>
+                </span>
+            </div>
+
+            <div class="percent-change">
+                <span class="<%= quote.className %>">
+                    (<%= quote.changePercent %>)
+                </span>
+            </div>
+        </div>
+        <% if (!['REGULAR', 'PRE'].includes(quote.marketState)) { %>
+            <div class="after-hours">
+                <span class="<%= quote.afterHoursClassName %>">
+                    <%= quote.postMarketChangePercent %>
+                </span>
+                <span>After Hours</span>
+            </div>
+        <% } %>
+    </div>
+</div>

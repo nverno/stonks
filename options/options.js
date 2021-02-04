@@ -1,4 +1,9 @@
 // save options to chrome storage
+const defaultSettings = {
+  tickers: ['TSLA', 'FTOC', 'AMC', 'GME'],
+  updateInterval: 10,
+};
+
 const options = [
   'avKey',
   'twitterConsumerKey',
@@ -7,6 +12,8 @@ const options = [
   'twitterAccessToken',
   'twitterAccessTokenSecret',
   'chartType',
+  'tickers',
+  'updateInterval',
 ];
 
 function save_options() {
@@ -28,11 +35,16 @@ function save_options() {
 
 function restore_options() {
   chrome.storage.sync.get(options, function (items) {
-    for (const [key, val] of Object.entries(items)) {
+    for (const [key, val] of Object.entries({ ...defaultSettings, ...items })) {
       const ele = document.getElementById(key);
-      if (typeof ele['value'] !== 'undefined') ele.value = val;
+      // FIXME: clean this up
+      if (key === 'tickers' && !val) ele.value = defaultSettings.tickers;
+      if (key === 'updateInterval' && (!val || val < 5))
+        ele.value = defaultSettings.updateInterval;
+      else if (typeof ele['value'] !== 'undefined') ele.value = val;
       else ele.checked = val;
     }
+    console.log('items: ', items);
   });
 }
 
