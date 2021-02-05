@@ -12,3 +12,10 @@ Built with javascript, jquery, and bootstrap.
 - add/remove tickers from the list to track their quotes in real-time
 - display time series/volume chart for results (work in progress)
 - chart summarizing twitter mentions over last few hours (work in progress)
+
+# Bugs/Todo
+
+- no need to hit api repeatedly when market isn't open
+- cleanup/remove ugly charts
+- sync chrome.storage with tickers for extension (different window available to
+  background scripts)
