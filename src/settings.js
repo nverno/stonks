@@ -3,6 +3,8 @@ export const defaultSettings = {
   updateInterval: 5,
   avKey: null,
   chartType: 'd3',
+  sortColumn: 'changePercent',
+  sortDescending: true,
 };
 
 export const stonkOptions = [

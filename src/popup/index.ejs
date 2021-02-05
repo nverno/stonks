@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%= htmlWebpackPlugin.tags.headTags %>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title><%= htmlWebpackPlugin.options.title %></title>
-    </head>
-    <body>
-        <div id="root">
-            <div class="container">
-                <section class="search-section">
-                    <header>
-                        <form id="search-form">
-                            <input type="text" class="search-input" placeholder="Search...">
-                        </form>
-
-                        <button class="cancel-button">
-                            <div class="cancel-button-icon"></div>
-                        </button>
-                    </header>
-
-                    <div class="search-results"></div>
-                    <!-- This is updated whenever a search result is chosen -->
-                    <div class="current-symbol"></div>
-                </section>
-
-                <section class="stock-chart">
-                    <div>
-                        <div id="chart-container"></div>
-                    </div>
-                </section>
-
-                <section class="quote-section">
-                    <div id="watchlist"></div>
-
-                    <div id="new-quote">
-                        <div class="list-controls">
-                            <button id="new-quote-button" type="button">
-                                <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
-                            </button>
-                            <button id="remove-quote-button" type="button">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="stock-reactions">
-                    <div class="row">
-
-                        <div class="col-md-8">
-                            <section id="cashtags">
-                            </section>
-                        </div>
-
-                        <div class="col-md-4">
-                            <section class="stock-socials"></section>
-                        </div>
-
-                    </div>
-                </section>
-
+  <head>
+    <%= htmlWebpackPlugin.tags.headTags %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <section class="quote-section">
+          <div id="list-header">
+            <div id="controls-container">
+              <div>
+                <button id="new-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                </button>
+                <button id="remove-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-minus fa-lg" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div>
+                <button id="sort-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-sort fa-lg" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
-        </div>
+          </div>
+          <div id="watchlist"></div>
+        </section>
 
-        <!-- Only inject index.bundle.js -->
-        <%= htmlWebpackPlugin.tags.bodyTags %>
-    </body>
+        <section class="search-section">
+          <header>
+            <form id="search-form">
+              <input type="text" class="search-input" placeholder="Search...">
+            </form>
+
+            <button class="cancel-button">
+              <div class="cancel-button-icon"></div>
+            </button>
+          </header>
+
+          <div class="search-results"></div>
+          <!-- This is updated whenever a search result is chosen -->
+          <div class="current-symbol"></div>
+        </section>
+
+        <section class="stock-chart">
+          <div>
+            <div id="chart-container"></div>
+          </div>
+        </section>
+
+        <section class="stock-reactions">
+          <div class="row">
+
+            <div class="col-md-8">
+              <section id="cashtags">
+              </section>
+            </div>
+
+            <div class="col-md-4">
+              <section class="stock-socials"></section>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Only inject index.bundle.js -->
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+  </body>
 </html>
