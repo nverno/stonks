@@ -63,7 +63,7 @@ const transformQuotes = (quotes) => {
       'postMarketChange',
       'regularMarketChange',
     ]) {
-      quote[key] = fmtPrice(quote[key]);
+      quote[key + 'Fmt'] = fmtPrice(quote[key]);
     }
 
     for (let key of [
@@ -72,7 +72,7 @@ const transformQuotes = (quotes) => {
       'regularMarketChangePercent',
       'postMarketChangePercent',
     ]) {
-      quote[key] = fmtPercent(quote[key]);
+      quote[key + 'Fmt'] = fmtPercent(quote[key]);
     }
 
     res[quote.symbol] = quote;

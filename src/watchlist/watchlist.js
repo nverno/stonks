@@ -47,13 +47,17 @@ const updateQuotes = async (currentQuotes) => {
 };
 
 const buildWatchlist = (quotes) => {
+  const sortBy = getOption('sortBy');
+  let sorted = Object.values(quotes);
+  sorted.sort((a, b) => b[sortBy] - a[sortBy]); // descending
+
   let list = $('#watchlist');
   list.empty();
 
   list.append(
     watchlist({
       quoteCell,
-      quotes: Object.values(quotes),
+      quotes: sorted,
     })
   );
 };

@@ -10,27 +10,27 @@
         <div>
             <!-- Temporarily highlight prices that changed on update -->
             <span class="price <%= quote.updated && quote.className %>">
-                <%= quote.price %>
+                <%= quote.priceFmt %>
             </span>
         </div>
 
         <div class="price-change">
             <div>
                 <span class="<%= quote.className %>">
-                    <%= quote.change %>
+                    <%= quote.changeFmt %>
                 </span>
             </div>
 
             <div class="percent-change">
                 <span class="<%= quote.className %>">
-                    (<%= quote.changePercent %>)
+                    (<%= quote.changePercentFmt %>)
                 </span>
             </div>
         </div>
         <% if (!['REGULAR', 'PRE'].includes(quote.marketState)) { %>
             <div class="after-hours">
                 <span class="<%= quote.afterHoursClassName %>">
-                    <%= quote.postMarketChangePercent %>
+                    <%= quote.postMarketChangePercentFmt %>
                 </span>
                 <span>After Hours</span>
             </div>
