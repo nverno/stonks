@@ -87,8 +87,10 @@ const toggleQuoteForm = (e, kind) => {
   if (form.length) {
     form.remove();
   } else {
+    const placeholder =
+      'Enter comma-separated symbols to ' + kind + ', eg. TSLA,APPL,...';
     let div = $('#new-quote');
-    form = $(quoteForm({ kind }));
+    form = $(quoteForm({ kind, placeholder }));
     form.submit((e) => submitQuote(e, kind));
     div.append(form);
   }
