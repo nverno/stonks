@@ -31,19 +31,12 @@ export const loadSettings = (callback) => {
       callback(items);
     });
   } else {
-    const opts = localStorage.getItem('stonks');
+    const opts = JSON.parse(localStorage.getItem('stonks'));
     callback(opts);
   }
 };
 
-const uniqueElements = (arr) => [...new Set(arr)];
 export const setOption = (key, val) => {
-  // Don't add duplicate tickers
-  if (key === 'tickers') {
-    let tickers = window.stonks[key].concat(val.split(','));
-    val = uniqueElements(tickers);
-  }
-
   if (chrome && chrome.storage) {
     chrome.storage.sync.set({ key: val }, function () {
       console.log(`Set ${key} = ${val}`);

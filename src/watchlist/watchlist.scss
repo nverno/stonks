@@ -2,6 +2,13 @@
   padding: 10px 0 10px 0;
 }
 
+.list-controls {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  padding-left: 27px;
+}
+
 #new-quote {
   display: flex;
   align-items: start;
@@ -25,10 +32,18 @@
 }
 
 #new-quote-button {
-  margin-left: 20px;
-  padding-left: 27px;
   & i:hover {
     color: var(--st__primary-base);
+  }
+  &:active, &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+#remove-quote-button {
+  & i:hover {
+    color: var(--st__semantic-negative-base);
   }
   &:active, &:focus {
     border: none;

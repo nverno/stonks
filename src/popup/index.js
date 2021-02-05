@@ -10,6 +10,7 @@ import { createTweetChart } from '../tweets/chart';
 import { handleSearch } from '../search/search';
 import { createStockChart } from '../chart/stock_chart';
 import { loadSettings, defaultSettings } from '../settings';
+import * as settings from '../settings';
 // import * as util from '../tweets/util';
 // import * as chart from '../tweets/chart';
 
@@ -21,6 +22,7 @@ $(document).ready(function () {
   window.$ = $;
   window.AvAPI = AvAPI;
   window.TwitterAPI = TwitterAPI;
+  window.settings = settings;
   // window.util = util;
   // window.chart = chart;
   // window._ = _;
@@ -83,7 +85,7 @@ const loadingCallback = (settings) => {
     window.av = new AvAPI({ avKey: window.stonks.avKey || null });
   }
 
-  if (window.stonks.tickers && window.stonks.tickers === 'string')
+  if (window.stonks.tickers && typeof window.stonks.tickers === 'string')
     window.stonks.tickers = window.stonks.tickers.split(',');
 
   window.stonks = { ...defaultSettings, ...window.stonks };
