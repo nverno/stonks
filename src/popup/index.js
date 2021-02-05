@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import _ from 'lodash';
+// import _ from 'lodash';
 import * as d3 from 'd3';
 import CanvasJS from '../../lib/canvasjs.stock.min.js';
 
@@ -9,10 +9,9 @@ import { createWatchlist } from '../watchlist/watchlist';
 import { createTweetChart } from '../tweets/chart';
 import { handleSearch } from '../search/search';
 import { createStockChart } from '../chart/stock_chart';
-import { defaultSettings, loadSettings } from '../settings';
-import * as quote from '../stocks/quote';
-import * as util from '../tweets/util';
-import * as chart from '../tweets/chart';
+import { loadSettings, defaultSettings } from '../settings';
+// import * as util from '../tweets/util';
+// import * as chart from '../tweets/chart';
 
 // import Icon from '../../icons/stonks.png';
 import './css/main.scss';
@@ -22,11 +21,10 @@ $(document).ready(function () {
   window.$ = $;
   window.AvAPI = AvAPI;
   window.TwitterAPI = TwitterAPI;
-  window.util = util;
-  window.chart = chart;
-  window._ = _;
+  // window.util = util;
+  // window.chart = chart;
+  // window._ = _;
   window.d3 = d3;
-  window.quote = quote;
   // END testing
 
   window.tweets = new TwitterAPI(); // twitter API instance
@@ -74,23 +72,21 @@ const loadingCallback = (settings) => {
   //     createSetupButton();
   //   }
   // }
+  console.log('settings: ', settings);
   window.stonks = settings || {};
 
   // initialize APIs
   if (!chrome.storage) {
     // Testing: alphavantage API thinks a key with string 'null' is valid, lol
     window.av = new AvAPI({ avKey: null });
-    if (window.stonks.tickers)
-      window.stonks.tickers = window.stonks.tickers.split(',');
   } else {
-    window.av = new AvAPI(window.stonks);
+    window.av = new AvAPI({ avKey: window.stonks.avKey || null });
   }
 
-  // defaults
-  window.stonks = {
-    ...defaultSettings,
-    ...window.stonks,
-  };
+  if (window.stonks.tickers && window.stonks.tickers === 'string')
+    window.stonks.tickers = window.stonks.tickers.split(',');
+
+  window.stonks = { ...defaultSettings, ...window.stonks };
 };
 
 const openOptionsPage = () => {

@@ -35,7 +35,7 @@ const BASE_URL = 'https://www.alphavantage.co/query?';
 
 class AvAPI {
   constructor({ avKey }) {
-    this.apiKey = avKey;
+    this.apiKey = avKey || null;
   }
 
   createUrl(params) {

@@ -1,10 +1,11 @@
-const defaultSettings = {
+export const defaultSettings = {
   tickers: ['TSLA', 'FTOC', 'AMC', 'GME'],
   updateInterval: 5,
+  avKey: null,
+  chartType: 'd3',
 };
 
-var chrome;
-const stonkOptions = [
+export const stonkOptions = [
   'tickers',
   'avKey',
   'twitterConsumerKey',
@@ -16,7 +17,7 @@ const stonkOptions = [
 ];
 
 // If in chrome extension, sync, otherwise save to localStorage
-const saveSettings = (settings) => {
+export const saveSettings = (settings) => {
   if (chrome && chrome.storage) {
     chrome.storage.sync.set(settings, function () {});
   } else {
@@ -24,23 +25,37 @@ const saveSettings = (settings) => {
   }
 };
 
-const loadSettings = (callback) => {
+export const loadSettings = (callback) => {
   if (chrome && chrome.storage) {
-    chrome.storage.sync.get(stonkOptions, callback);
+    chrome.storage.sync.get(stonkOptions, function (items) {
+      callback(items);
+    });
   } else {
     const opts = localStorage.getItem('stonks');
     callback(opts);
   }
 };
 
-const getOption = (key) => {
-  return window.stonks[key];
+const uniqueElements = (arr) => [...new Set(arr)];
+export const setOption = (key, val) => {
+  // Don't add duplicate tickers
+  if (key === 'tickers') {
+    let tickers = window.stonks[key].concat(val.split(','));
+    val = uniqueElements(tickers);
+  }
+
+  if (chrome && chrome.storage) {
+    chrome.storage.sync.set({ key: val }, function () {
+      console.log(`Set ${key} = ${val}`);
+    });
+  } else {
+    window.stonks[key] = val;
+    localStorage.setItem('stonks', JSON.stringify(window.stonks));
+  }
 };
 
-module.exports = {
-  getOption,
-  saveSettings,
-  loadSettings,
-  stonkOptions,
-  defaultSettings,
+export const getOption = (key) => {
+  return typeof window.stonks === 'undefined'
+    ? defaultSettings[key]
+    : window.stonks[key];
 };

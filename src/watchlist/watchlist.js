@@ -5,8 +5,9 @@
 import $ from 'jquery';
 import watchlist from './watchlist.ejs';
 import quoteCell from './quote_cell.ejs';
+import quoteForm from './quote_form.ejs';
 import { fetchQuotes } from '../stocks/quote';
-import { getOption } from '../settings';
+import { getOption, setOption } from '../settings';
 import './watchlist.scss';
 
 // mark
@@ -34,7 +35,7 @@ const updateQuotes = async (currentQuotes) => {
   const quotes = await fetchQuotes(tickers.join(','));
 
   if (needsUpdate(currentQuotes, quotes)) {
-    console.log('Updating quotes: ', quotes);
+    // console.log('Updating quotes: ', quotes);
     buildWatchlist(quotes);
     setTimeout(removeUpdates, 1000);
   }
@@ -54,13 +55,32 @@ const buildWatchlist = (quotes) => {
       quotes: Object.values(quotes),
     })
   );
+};
 
-  // list.on('click', function(e) {
-  //   e.preventDefault();
-  //   alert('TODO! ', assets);
-  // });
+// Handle adding quotes to list
+const submitQuote = (e) => {
+  e.preventDefault();
+  const tickers = $('#symbols').val().replace(/ /g, '');
+  setOption('tickers', tickers);
+  $('#quote-form').remove();
+};
+
+const toggleQuoteForm = (e) => {
+  e.preventDefault();
+  let form = $('#quote-form');
+
+  if (form.length) {
+    form.remove();
+  } else {
+    let div = $('#new-quote');
+    form = $(quoteForm());
+    form.submit(submitQuote);
+    div.append(form);
+  }
 };
 
 export const createWatchlist = () => {
   updateQuotes({});
+
+  $('#new-quote-button').on('click', toggleQuoteForm);
 };
