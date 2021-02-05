@@ -46,10 +46,27 @@ const updateQuotes = async (currentQuotes) => {
   }, interval);
 };
 
+const forceRefresh = () => {
+  clearTimeout(timeout);
+  updateQuotes({});
+};
+
+const toggleQuoteSort = (e) => {
+  e.preventDefault();
+  const desc = getOption('sortDescending');
+  setOption('sortDescending', !desc);
+  forceRefresh();
+};
+
+const quoteSorter = () => {
+  const col = getOption('sortColumn');
+  const desc = getOption('sortDescending');
+  return (a, b) => (desc ? b[col] - a[col] : a[col] - b[col]);
+};
+
 const buildWatchlist = (quotes) => {
-  const sortBy = getOption('sortBy');
   let sorted = Object.values(quotes);
-  sorted.sort((a, b) => b[sortBy] - a[sortBy]); // descending
+  sorted.sort(quoteSorter());
 
   let list = $('#watchlist');
   list.empty();
@@ -80,8 +97,7 @@ const submitQuote = (e, kind) => {
 
   setOption('tickers', res);
   $('#quote-form').remove();
-  clearTimeout(timeout);
-  updateQuotes({});
+  forceRefresh();
 };
 
 const toggleQuoteForm = (e, kind) => {
@@ -93,7 +109,7 @@ const toggleQuoteForm = (e, kind) => {
   } else {
     const placeholder =
       'Enter comma-separated symbols to ' + kind + ', eg. TSLA,APPL,...';
-    let div = $('#new-quote');
+    let div = $('#list-header');
     form = $(quoteForm({ kind, placeholder }));
     form.submit((e) => submitQuote(e, kind));
     div.append(form);
@@ -102,7 +118,7 @@ const toggleQuoteForm = (e, kind) => {
 
 export const createWatchlist = () => {
   updateQuotes({});
-
   $('#new-quote-button').on('click', (e) => toggleQuoteForm(e, 'add'));
   $('#remove-quote-button').on('click', (e) => toggleQuoteForm(e, 'remove'));
+  $('#sort-quote-button').on('click', toggleQuoteSort);
 };

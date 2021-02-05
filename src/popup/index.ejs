@@ -9,6 +9,27 @@
   <body>
     <div id="root">
       <div class="container">
+        <section class="quote-section">
+          <div id="list-header">
+            <div id="controls-container">
+              <div>
+                <button id="new-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+                </button>
+                <button id="remove-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-minus fa-lg" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div>
+                <button id="sort-quote-button" class="quote-button" type="button">
+                  <i class="fa fa-sort fa-lg" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="watchlist"></div>
+        </section>
+
         <section class="search-section">
           <header>
             <form id="search-form">
@@ -28,21 +49,6 @@
         <section class="stock-chart">
           <div>
             <div id="chart-container"></div>
-          </div>
-        </section>
-
-        <section class="quote-section">
-          <div id="watchlist"></div>
-
-          <div id="new-quote">
-            <div class="list-controls">
-              <button id="new-quote-button" type="button">
-                <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
-              </button>
-              <button id="remove-quote-button" type="button">
-                <i class="fa fa-minus" aria-hidden="true"></i>
-              </button>
-            </div>
           </div>
         </section>
 
