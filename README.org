@@ -10,6 +10,7 @@ Built with javascript, jquery, and bootstrap.
 
 * Features
 - search for tickers by symbol or company name
-- display time series/volume chart for results (work in progress)
 - add/remove tickers from the list to track their quotes in real-time
+- display time series/volume chart for results (work in progress)
+- chart summarizing twitter mentions over last few hours (work in progress)
 
