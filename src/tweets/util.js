@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { groupBy } from 'lodash';
 const none = (arr, fn = Boolean) => !arr.some(fn);
 
 export const cleanTweets = (tag, { data, meta }) => {
@@ -33,7 +33,7 @@ export const cleanTweets = (tag, { data, meta }) => {
 };
 
 export const groupByHour = ({ data }) => {
-  const groups = _.groupBy(data, ({ createdAt }) => {
+  const groups = groupBy(data, ({ createdAt }) => {
     let d = new Date(createdAt);
     d.setMinutes(0);
     d.setSeconds(0);
@@ -50,7 +50,7 @@ export const groupByHour = ({ data }) => {
 };
 
 export const groupByMinutes = ({ data }, minutes) => {
-  const groups = _.groupBy(data, ({ createdAt }) => {
+  const groups = groupBy(data, ({ createdAt }) => {
     let d = new Date(createdAt);
     const mins = Math.floor(d.getMinutes() / minutes);
     d.setMinutes(d.getMinutes() - mins);
